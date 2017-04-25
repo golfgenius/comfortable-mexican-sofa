@@ -35,7 +35,7 @@ class Comfy::Cms::Site < ActiveRecord::Base
   # -- Class Methods --------------------------------------------------------
   # returning the Comfy::Cms::Site instance based on host and path
   def self.find_site(host, path = nil)
-    Apartment::Tenant.switch("public") if Apartment::Tenant.present?
+    Apartment::Tenant.switch!("public") if Apartment::Tenant.present?
     return Comfy::Cms::Site.first if Comfy::Cms::Site.count == 1
     cms_site = nil
     Comfy::Cms::Site.where(:hostname => real_host_from_aliases(host)).each do |site|
